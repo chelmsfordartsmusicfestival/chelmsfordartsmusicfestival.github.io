@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Chelmsford Arts and Music Festival</title> 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	</head>
+	<style>
+		html {
+			overflow-y:hidden;
+		}
+		body {
+			background-image: url('intro.gif');
+			background-repeat: no-repeat;
+			background-size: cover;
+			text-align: center;
+		}
+		form {
+			position: absolute;
+			margin-top: 30.3%; margin-left: 37%;
+			width: 25%;
+		}
+
+		label {
+			color: white;
+			font-size: 2em;
+			font-family: Calibri;
+		}
+		input{
+			width: 80%;
+			height: 2em;
+			font-size: 1.5em;
+			border: none;
+			background-color:rgba(0,0,0,0.0);
+		}
+		input:focus {
+		    outline: none;
+		}
+		meter {
+			width: 12em; height: 3em;
+		}
+		#meter {
+			position: absolute;
+			margin-left: -17%; margin-top: 34%;
+			/*background-color:rgba(0,0,0,0.9);*/
+			width: 100%; 
+			border-radius: 2em;
+			padding-bottom: 1%;
+			transform: rotate(270deg);
+		}
+		#signups_label {
+			font-size: 1em;
+			position: absolute;
+			margin-top: 26.5%; margin-left: -18.3%;
+			color: black;
+		}
+		#signups_count_label {
+			font-size: 1em;
+			position: absolute;
+			margin-top: 35%; margin-left: -40.3%;
+			color: black;
+			opacity: 0.0;
+		}
+		#signups_label2 {
+			font-size: 0.8em;
+			position: absolute;
+			margin-top: 43%; margin-left: -20%;
+			color: black;
+		}
+		#signup_div{
+			opacity: 0.0; margin-top: -5%;
+		}
+		button {
+			margin-left: 35%; margin-top: 30.5%;
+			height: 14em; 
+			border-radius: 1em;
+			background-color: lightgreen;
+			opacity: 0.0;
+		}
+	</style>
+	<body>
+		<form>
+		  <input type="text" id="name" name="name"><br><br><br><br><br>
+		  <input type="text" id="email" name="email"><br><br><br>
+		</form>
+		<br><br>
+		<div id="signup_div">
+			<label id="signups_label" for="signups">S i g n<br>U p s</label> 
+			<div id="meter">
+				<meter id="signups" value="0" min="0" max="10"></meter><br>
+			</div>
+			<label id="signups_label2" for="signups">When full, show<br>will be booked!</label>
+		</div>
+		<a id="signup_button_link" href="">
+			<button id="signup_button" type="button">EMAIL</button>
+		</a>
+	</body>
+	<script type="text/javascript">
+		window.onload = (event) => {
+  			//After 7 seconds, overwrite the the background img gif to the static home page png
+			var imageUrl = "home.png";
+			setTimeout(function(){
+				$('body').css('background-image', 'url(' + imageUrl + ')');
+			}, 8000);
+
+			//After 6 seconds, execute fade in effects for meter and sign up button
+			setTimeout(function(){
+				var n = 0;
+				setInterval(function(){
+					n = n + 0.1;
+					$('#signup_div').css('opacity', n);
+					if (n>10)
+						clearInterval();
+				}, 100);
+
+				var i = 0;
+				setInterval(function(){
+					i = i + 0.1;
+					$('button').css('opacity', i);
+					if (i>10)
+						clearInterval();
+				}, 100);
+
+				var k = 0;
+				setInterval(function(){
+					k = k + 0.1;
+					$('#signups_count_label').css('opacity', k);
+					if (k>10)
+						clearInterval();
+				}, 100);
+			}, 4500);
+			
+			var sign_ups = $("#signups")[0].attributes.value.value;
+			var max = $("#signups")[0].attributes.max.value;
+			console.log("SIGNUPS", sign_ups, max);
+			$("#signups_count_label").html("<sup>"+String(sign_ups)+"</sup>&frasl;<sub>"+String(max)+"</sub>");
+
+
+			$("#signup_button").on("click", function(){
+				var name = $("#name")[0].value;
+				console.log(name);
+
+				var email = $("#email")[0].value;
+				console.log(email);
+
+				$("#signup_button_link")[0].href = "mailto:chelmsfordartsmusicfestival@gmail.com?subject=SIGN-UP&body="+name+": "+email;
+
+			});
+		}
+		
+	</script>
+</html>
