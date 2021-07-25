@@ -9,7 +9,7 @@
 			overflow-y:hidden;
 		}
 		body {
-			background-image: url('intro.gif');
+			background-image: none;
 			background-repeat: no-repeat;
 			background-size: cover;
 			text-align: center;
@@ -91,16 +91,25 @@
 			<label id="signups_label2" for="signups">When full, show<br>will be booked!</label>
 		</div>
 		<a id="signup_button_link" href="">
-			<button id="signup_button" type="button">EMAIL</button>
+			<button id="signup_button" type="button">SEND<br>EMAIL</button>
 		</a>
 	</body>
-	<script type="text/javascript">
+	<script type="text/javascript"> 
 		window.onload = (event) => {
   			//After 7 seconds, overwrite the the background img gif to the static home page png
-			var imageUrl = "home.png";
-			setTimeout(function(){
-				$('body').css('background-image', 'url(' + imageUrl + ')');
-			}, 8000);
+  			var imageUrl1 = "intro.gif";
+  			$('body').css('background-image', 'url(' + imageUrl1 + ')');
+
+			var imageUrl2 = "home.png";
+			setTimeout(function(){ 
+				$('body').css('background-image', 'url(' + imageUrl2 + ')');
+				setInterval(function(){
+					n = n + 0.1;
+					$('#signup_div').css('opacity', n);
+					if (n>10)
+						clearInterval();
+				}, 100);
+			}, 7500);
 
 			//After 6 seconds, execute fade in effects for meter and sign up button
 			setTimeout(function(){
